@@ -29,4 +29,4 @@ CREATE TABLE IF NOT EXISTS rental_images (
     url text
 );
 
-CREATE INDEX rental_images_rental_id_fkey ON rental_images(rental_id int4_ops);
+CREATE INDEX IF NOT EXISTS rental_images_rental_id_fkey ON rental_images(rental_id int4_ops);
