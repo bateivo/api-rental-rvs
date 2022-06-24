@@ -27,8 +27,6 @@ dependencies {
     compileOnly("org.graalvm.nativeimage:svm")
     implementation("io.micronaut:micronaut-validation")
     implementation("io.micronaut.flyway:micronaut-flyway")
-    implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
-    compileOnly("jakarta.persistence:jakarta.persistence-api")
 }
 
 

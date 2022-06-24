@@ -1,9 +1,10 @@
 package com.bateivo.tasks.repo;
 
-import com.bateivo.tasks.dto.Rental;
-import io.micronaut.data.annotation.Repository;
+import com.bateivo.tasks.dto.Rentals;
+import io.micronaut.data.jdbc.annotation.JdbcRepository;
 import io.micronaut.data.repository.PageableRepository;
 
-@Repository
-public interface RentalRvsRepository extends PageableRepository<Rental, Long> {
+@JdbcRepository
+public interface RentalRvsRepository extends PageableRepository<Rentals, Long> {
+
 }
