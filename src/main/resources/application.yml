@@ -12,7 +12,7 @@ datasources:
 jpa:
   default:
     packages-to-scan:
-      - 'bateivo.tasks'
+      - 'com.bateivo.tasks.dto'
     properties:
       hibernate:
         hbm2ddl:
