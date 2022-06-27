@@ -1,9 +1,12 @@
 package com.bateivo.tasks.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -57,10 +60,16 @@ public class Rental {
 
     private String owner_avatar_url;
 
-    //@OneToMany(mappedBy = "rentals")
-    //private Set<RentalImage> images = new HashSet<>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "rental")
+    private Set<RentalImage> images = new HashSet<>();
 
     public Rental() {}
+
+    public Rental(@NotNull Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -238,13 +247,13 @@ public class Rental {
         this.owner_avatar_url = owner_avatar_url;
     }
 
-//    public Set<RentalImage> getImages() {
-//        return images;
-//    }
-//
-//    public void setImages(Set<RentalImage> images){
-//        this.images = images;
-//    }
+    public Set<RentalImage> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<RentalImage> images){
+        this.images = images;
+    }
 
     @Override
     public String toString(){

@@ -6,6 +6,8 @@ import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.ExecuteOn;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @ExecuteOn(TaskExecutors.IO)
@@ -19,9 +21,8 @@ public class RentalRvsController {
         this.rentalRvsRepository = rentalRvsRepository;
     }
 
-    @Get(value = "/list")
-    public List<Rental> list() {
-
-        return rentalRvsRepository.findAll();
+    @Get(value = "/list{?args*}")
+    List<Rental> list(@Valid SortingAndOrderArguments args) {
+        return rentalRvsRepository.findAll(args);
     }
 }
