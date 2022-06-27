@@ -2,10 +2,7 @@ package com.bateivo.tasks.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -26,25 +23,35 @@ public class Rental {
 
     private Integer sleeps;
 
-    private Long price_per_day;
+    @Column(name="price_per_day")
+    private Long pricePerDay;
 
-    private String home_city;
+    @Column(name="home_city")
+    private String homeCity;
 
-    private String home_state;
+    @Column(name="home_state")
+    private String homeState;
 
-    private String home_zip;
+    @Column(name="home_zip")
+    private String homeZip;
 
-    private String home_county;
+    @Column(name="home_county")
+    private String homeCounty;
 
-    private String home_country;
+    @Column(name="home_country")
+    private String homeCountry;
 
-    private String vehicle_make;
+    @Column(name="vehicle_make")
+    private String vehicleMake;
 
-    private String vehicle_model;
+    @Column(name="vehicle_model")
+    private String vehicleModel;
 
-    private Integer vehicle_year;
+    @Column(name="vehicle_year")
+    private Integer vehicleYear;
 
-    private BigDecimal vehicle_length;
+    @Column(name="vehicle_length")
+    private BigDecimal vehicleLength;
 
     private Timestamp created;
 
@@ -54,11 +61,14 @@ public class Rental {
 
     private Double lng;
 
-    private String primary_image_url;
+    @Column(name="primary_image_url")
+    private String primaryImageUrl;
 
-    private String owner_name;
+    @Column(name="owner_name")
+    private String ownerName;
 
-    private String owner_avatar_url;
+    @Column(name="owner_avatar_url")
+    private String ownerAvatarUrl;
 
     @JsonIgnore
     @OneToMany(mappedBy = "rental")
@@ -111,84 +121,84 @@ public class Rental {
         this.sleeps = sleeps;
     }
 
-    public Long getPrice_per_day() {
-        return price_per_day;
+    public Long getPricePerDay() {
+        return pricePerDay;
     }
 
-    public void setPrice_per_day(Long price_per_day) {
-        this.price_per_day = price_per_day;
+    public void setPricePerDay(Long pricePerDay) {
+        this.pricePerDay = pricePerDay;
     }
 
-    public String getHome_city() {
-        return home_city;
+    public String getHomeCity() {
+        return homeCity;
     }
 
-    public void setHome_city(String home_city) {
-        this.home_city = home_city;
+    public void setHomeCity(String homeCity) {
+        this.homeCity = homeCity;
     }
 
-    public String getHome_state() {
-        return home_state;
+    public String getHomeState() {
+        return homeState;
     }
 
-    public void setHome_state(String home_state) {
-        this.home_state = home_state;
+    public void setHomeState(String homeState) {
+        this.homeState = homeState;
     }
 
-    public String getHome_zip() {
-        return home_zip;
+    public String getHomeZip() {
+        return homeZip;
     }
 
-    public void setHome_zip(String home_zip) {
-        this.home_zip = home_zip;
+    public void setHomeZip(String homeZip) {
+        this.homeZip = homeZip;
     }
 
-    public String getHome_county() {
-        return home_county;
+    public String getHomeCounty() {
+        return homeCounty;
     }
 
-    public void setHome_county(String home_county) {
-        this.home_county = home_county;
+    public void setHomeCounty(String homeCounty) {
+        this.homeCounty = homeCounty;
     }
 
-    public String getHome_country() {
-        return home_country;
+    public String getHomeCountry() {
+        return homeCountry;
     }
 
-    public void setHome_country(String home_country) {
-        this.home_country = home_country;
+    public void setHomeCountry(String homeCountry) {
+        this.homeCountry = homeCountry;
     }
 
-    public String getVehicle_make() {
-        return vehicle_make;
+    public String getVehicleMake() {
+        return vehicleMake;
     }
 
-    public void setVehicle_make(String vehicle_make) {
-        this.vehicle_make = vehicle_make;
+    public void setVehicleMake(String vehicleMake) {
+        this.vehicleMake = vehicleMake;
     }
 
-    public String getVehicle_model() {
-        return vehicle_model;
+    public String getVehicleModel() {
+        return vehicleModel;
     }
 
-    public void setVehicle_model(String vehicle_model) {
-        this.vehicle_model = vehicle_model;
+    public void setVehicleModel(String vehicleModel) {
+        this.vehicleModel = vehicleModel;
     }
 
-    public Integer getVehicle_year() {
-        return vehicle_year;
+    public Integer getVehicleYear() {
+        return vehicleYear;
     }
 
-    public void setVehicle_year(Integer vehicle_year) {
-        this.vehicle_year = vehicle_year;
+    public void setVehicleYear(Integer vehicleYear) {
+        this.vehicleYear = vehicleYear;
     }
 
-    public BigDecimal getVehicle_length() {
-        return vehicle_length;
+    public BigDecimal getVehicleLength() {
+        return vehicleLength;
     }
 
-    public void setVehicle_length(BigDecimal vehicle_length) {
-        this.vehicle_length = vehicle_length;
+    public void setVehicleLength(BigDecimal vehicleLength) {
+        this.vehicleLength = vehicleLength;
     }
 
     public Timestamp getCreated() {
@@ -223,28 +233,28 @@ public class Rental {
         this.lng = lng;
     }
 
-    public String getPrimary_image_url() {
-        return primary_image_url;
+    public String getPrimaryImageUrl() {
+        return primaryImageUrl;
     }
 
-    public void setPrimary_image_url(String primary_image_url) {
-        this.primary_image_url = primary_image_url;
+    public void setPrimaryImageUrl(String primaryImageUrl) {
+        this.primaryImageUrl = primaryImageUrl;
     }
 
-    public String getOwner_name() {
-        return owner_name;
+    public String getOwnerName() {
+        return ownerName;
     }
 
-    public void setOwner_name(String owner_name) {
-        this.owner_name = owner_name;
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 
-    public String getOwner_avatar_url() {
-        return owner_avatar_url;
+    public String getOwnerAvatarUrl() {
+        return ownerAvatarUrl;
     }
 
-    public void setOwner_avatar_url(String owner_avatar_url) {
-        this.owner_avatar_url = owner_avatar_url;
+    public void setOwnerAvatarUrl(String ownerAvatarUrl) {
+        this.ownerAvatarUrl = ownerAvatarUrl;
     }
 
     public Set<RentalImage> getImages() {
@@ -258,6 +268,6 @@ public class Rental {
     @Override
     public String toString(){
         return "Rental { id = " + id + ", name = '" + name + '\'' +
-                "type = " + type + "price per day = " + price_per_day + " }";
+                "type = " + type + "price per day = " + pricePerDay + " }";
     }
 }
