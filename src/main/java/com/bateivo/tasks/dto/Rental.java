@@ -1,13 +1,17 @@
 package com.bateivo.tasks.dto;
 
-import io.micronaut.data.annotation.Id;
-import io.micronaut.data.annotation.MappedEntity;
-
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
-@MappedEntity
-public class Rentals {
+@Entity
+@Table(name = "rentals")
+public class Rental {
     @Id
     private Long id;
 
@@ -52,6 +56,11 @@ public class Rentals {
     private String owner_name;
 
     private String owner_avatar_url;
+
+    //@OneToMany(mappedBy = "rentals")
+    //private Set<RentalImage> images = new HashSet<>();
+
+    public Rental() {}
 
     public Long getId() {
         return id;
@@ -228,6 +237,14 @@ public class Rentals {
     public void setOwner_avatar_url(String owner_avatar_url) {
         this.owner_avatar_url = owner_avatar_url;
     }
+
+//    public Set<RentalImage> getImages() {
+//        return images;
+//    }
+//
+//    public void setImages(Set<RentalImage> images){
+//        this.images = images;
+//    }
 
     @Override
     public String toString(){

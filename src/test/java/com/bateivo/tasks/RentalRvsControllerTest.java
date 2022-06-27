@@ -1,6 +1,6 @@
 package com.bateivo.tasks;
 
-import com.bateivo.tasks.dto.Rentals;
+import com.bateivo.tasks.dto.Rental;
 import io.micronaut.core.type.Argument;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.client.HttpClient;
@@ -24,7 +24,7 @@ public class RentalRvsControllerTest {
     public void testGetListAll() {
 
         HttpRequest<?> request = HttpRequest.GET("/rvs/list");
-        List<Rentals> rentals = client.toBlocking().retrieve(request, Argument.of(List.class, Rentals.class));
+        List<Rental> rentals = client.toBlocking().retrieve(request, Argument.of(List.class, Rental.class));
 
         assertEquals(30, rentals.size());
 
