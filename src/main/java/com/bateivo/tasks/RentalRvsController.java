@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @ExecuteOn(TaskExecutors.IO)
-@Controller("/rvs")
+@Controller("/")
 public class RentalRvsController {
 
     protected final IRentalRvsRepository rentalRvsRepository;
@@ -21,8 +21,9 @@ public class RentalRvsController {
         this.rentalRvsRepository = rentalRvsRepository;
     }
 
-    @Get(value = "/list{?args*}")
+    @Get(value = "/rvs{?args*}")
     List<Rental> list(@Valid SortingAndOrderArguments args) {
+
         return rentalRvsRepository.findAll(args);
     }
 }

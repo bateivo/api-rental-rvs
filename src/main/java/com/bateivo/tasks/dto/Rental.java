@@ -24,7 +24,7 @@ public class Rental {
     private Integer sleeps;
 
     @Column(name="price_per_day")
-    private Long pricePerDay;
+    private Long price;
 
     @Column(name="home_city")
     private String homeCity;
@@ -121,12 +121,12 @@ public class Rental {
         this.sleeps = sleeps;
     }
 
-    public Long getPricePerDay() {
-        return pricePerDay;
+    public Long getPrice() {
+        return price;
     }
 
-    public void setPricePerDay(Long pricePerDay) {
-        this.pricePerDay = pricePerDay;
+    public void setPrice(Long price) {
+        this.price = price;
     }
 
     public String getHomeCity() {
@@ -268,6 +268,6 @@ public class Rental {
     @Override
     public String toString(){
         return "Rental { id = " + id + ", name = '" + name + '\'' +
-                "type = " + type + "price per day = " + pricePerDay + " }";
+                "type = " + type + "price per day = " + price + " }";
     }
 }

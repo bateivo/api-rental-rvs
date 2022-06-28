@@ -13,7 +13,7 @@ import java.util.*;
 @Singleton
 public class RentalRvsRepository implements IRentalRvsRepository{
 
-    private static final List<String> VALID_PROPERTY_NAMES = Arrays.asList("id", "name");
+    private static final List<String> VALID_PROPERTY_NAMES = Arrays.asList("price");
 
     private final EntityManager entityManager;
     private final ApplicationConfiguration applicationConfiguration;
@@ -25,27 +25,35 @@ public class RentalRvsRepository implements IRentalRvsRepository{
 
     @ReadOnly
     public List<Rental> findAll(SortingAndOrderArguments args) {
+
         String qlString = "SELECT r FROM Rental as r";
-        if (args.getOrder().isPresent() && args.getSort().isPresent() && VALID_PROPERTY_NAMES.contains(args.getSort().get())) {
-            qlString += " ORDER BY r." + args.getSort().get() + ' ' + args.getOrder().get().toLowerCase();
+
+        if (args.getPriceMin().isPresent() && args.getPriceMax().isPresent())
+        {
+            qlString += " WHERE r.price >= " + args.getPriceMin().get() +
+                    " AND r.price <= " + args.getPriceMax().get();
         }
+
+        if (args.getSort().isPresent() && VALID_PROPERTY_NAMES.contains(args.getSort().get())) {
+
+            qlString += " ORDER BY r." + args.getSort().get();
+
+            if (args.getOrder().isPresent()) {
+
+                qlString += ' ' + args.getOrder().get().toLowerCase();
+
+            } else {
+
+                qlString += " ASC";
+            }
+        }
+
         TypedQuery<Rental> query = entityManager.createQuery(qlString, Rental.class);
-        query.setMaxResults(args.getMax().orElseGet(applicationConfiguration::getMax));
+
+        query.setMaxResults(args.getLimit().orElseGet(applicationConfiguration::getMax));
+
         args.getOffset().ifPresent(query::setFirstResult);
 
         return query.getResultList();
     }
-
-    @ReadOnly
-    public List<Rental> findAll() {
-
-        String qlString = "SELECT r FROM Rental as r";
-
-        TypedQuery<Rental> query = entityManager.createQuery(qlString, Rental.class);
-
-        query.setMaxResults(applicationConfiguration.getMax());
-
-        return query.getResultList();
-    }
-
 }

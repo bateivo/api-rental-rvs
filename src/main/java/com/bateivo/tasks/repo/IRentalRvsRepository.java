@@ -10,6 +10,4 @@ public interface IRentalRvsRepository {
 
     List<Rental> findAll(@NotNull SortingAndOrderArguments args);
 
-    List<Rental> findAll();
-
 }

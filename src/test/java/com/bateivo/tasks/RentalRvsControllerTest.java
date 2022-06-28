@@ -32,7 +32,7 @@ public class RentalRvsControllerTest {
     @Test
     public void testGetListAll() {
 
-        HttpRequest<?> request = HttpRequest.GET("/rvs/list");
+        HttpRequest<?> request = HttpRequest.GET("/rvs");
         List<Rental> rentals = blockingClient.retrieve(request, Argument.of(List.class, Rental.class));
 
         assertEquals(30, rentals.size());
@@ -42,7 +42,7 @@ public class RentalRvsControllerTest {
     @Test
     public void testGetOne() {
 
-        HttpRequest<?> request = HttpRequest.GET("/rvs/list?max=1");
+        HttpRequest<?> request = HttpRequest.GET("/rvs?limit=1");
         List<Rental> rentals = blockingClient.retrieve(request, Argument.of(List.class, Rental.class));
 
         assertEquals(1, rentals.size());

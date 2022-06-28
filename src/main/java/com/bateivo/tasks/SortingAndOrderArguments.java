@@ -16,15 +16,23 @@ public class SortingAndOrderArguments {
 
     @Nullable
     @Positive
-    private Integer max;
+    private Integer limit;
 
     @Nullable
-    @Pattern(regexp = "id|name")
+    @Pattern(regexp = "price")
     private String sort;
 
     @Nullable
     @Pattern(regexp = "asc|ASC|desc|DESC")
     private String order;
+
+    @Nullable
+    @Positive
+    private Integer priceMin;
+
+    @Nullable
+    @Positive
+    private Integer priceMax;
 
     public Optional<Integer> getOffset() {
         return Optional.ofNullable(offset);
@@ -34,12 +42,12 @@ public class SortingAndOrderArguments {
         this.offset = offset;
     }
 
-    public Optional<Integer> getMax() {
-        return Optional.ofNullable(max);
+    public Optional<Integer> getLimit() {
+        return Optional.ofNullable(limit);
     }
 
-    public void setMax(@Nullable Integer max) {
-        this.max = max;
+    public void setLimit(@Nullable Integer limit) {
+        this.limit = limit;
     }
 
     public Optional<String> getSort() {
@@ -57,4 +65,12 @@ public class SortingAndOrderArguments {
     public void setOrder(@Nullable String order) {
         this.order = order;
     }
+
+    public Optional<Integer> getPriceMin() { return Optional.ofNullable(priceMin); }
+
+    public void setPriceMin(@Nullable Integer priceMin) { this.priceMin = priceMin; }
+
+    public Optional<Integer> getPriceMax() { return Optional.ofNullable(priceMax); }
+
+    public void setPriceMax(@Nullable Integer priceMax) { this.priceMax = priceMax; }
 }
