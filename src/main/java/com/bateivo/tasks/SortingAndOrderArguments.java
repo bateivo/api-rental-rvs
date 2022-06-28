@@ -1,7 +1,10 @@
 package com.bateivo.tasks;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.micronaut.core.annotation.Introspected;
 import io.micronaut.core.annotation.Nullable;
+import io.micronaut.http.annotation.QueryValue;
+
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
@@ -33,6 +36,15 @@ public class SortingAndOrderArguments {
     @Nullable
     @Positive
     private Integer priceMax;
+
+    @Nullable
+    @Pattern(regexp = "[\\d, /,]+")
+    private String ids;
+
+
+    public Optional<String> getIds() { return Optional.ofNullable(ids); }
+
+    public void setIds(@Nullable String ids) { this.ids = ids; }
 
     public Optional<Integer> getOffset() {
         return Optional.ofNullable(offset);

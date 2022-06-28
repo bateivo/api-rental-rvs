@@ -26,12 +26,28 @@ public class RentalRvsRepository implements IRentalRvsRepository{
     @ReadOnly
     public List<Rental> findAll(SortingAndOrderArguments args) {
 
+        boolean isWhereAdded = false;
+
         String qlString = "SELECT r FROM Rental as r";
 
         if (args.getPriceMin().isPresent() && args.getPriceMax().isPresent())
         {
             qlString += " WHERE r.price >= " + args.getPriceMin().get() +
                     " AND r.price <= " + args.getPriceMax().get();
+
+            isWhereAdded = true;
+        }
+
+        if (args.getIds().isPresent()) {
+
+            if (!isWhereAdded) {
+
+                qlString += " WHERE r.id IN (" + args.getIds().get()  + ')';
+
+            } else {
+
+                qlString += " AND r.id IN (" + args.getIds().get() + ')';
+            }
         }
 
         if (args.getSort().isPresent() && VALID_PROPERTY_NAMES.contains(args.getSort().get())) {
