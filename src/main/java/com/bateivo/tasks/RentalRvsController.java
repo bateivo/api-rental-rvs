@@ -2,7 +2,6 @@ package com.bateivo.tasks;
 
 import com.bateivo.tasks.dto.Rental;
 import com.bateivo.tasks.repo.*;
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.QueryValue;

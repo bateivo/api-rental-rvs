@@ -70,7 +70,28 @@ public class RentalRvsRepository implements IRentalRvsRepository{
 
         args.getOffset().ifPresent(query::setFirstResult);
 
-        return query.getResultList();
+        List<Rental> rentals = query.getResultList();
+
+        if (args.getNear().isPresent()) {
+
+            List<Rental> nearRentals = new ArrayList<>();
+            List<String> coordinates = Arrays.asList(args.getNear().get().split("\\s*,\\s*"));
+
+            double centerPointLat = Double.parseDouble(coordinates.get(0));
+            double centerPointLng = Double.parseDouble(coordinates.get(1));
+
+            for (Rental rental : rentals) {
+
+                if (arePointsNear(centerPointLat, centerPointLng, rental.getLat(), rental.getLng())) {
+
+                    nearRentals.add(rental);
+                }
+            }
+
+            return nearRentals;
+        }
+
+        return rentals;
     }
 
     @Override
@@ -78,5 +99,19 @@ public class RentalRvsRepository implements IRentalRvsRepository{
     public Optional<Rental> findById(long id) {
 
         return Optional.ofNullable(entityManager.find(Rental.class, id));
+    }
+
+    private boolean arePointsNear(double centerPointLat,
+                                  double centerPointLng,
+                                  double checkPointLat,
+                                  double checkPointLng) {
+
+        double km = 100 * 1.61;
+        int ky = 40000 / 360;
+        double kx = Math.cos(Math.PI * centerPointLat / 180.0) * ky;
+        double dx = Math.abs(centerPointLng - checkPointLng) * kx;
+        double dy = Math.abs(centerPointLat - checkPointLat) * ky;
+
+        return Math.sqrt(dx * dx + dy * dy) <= km;
     }
 }
