@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @ExecuteOn(TaskExecutors.IO)
-@Controller("/")
+@Controller()
 public class RentalRvsController {
 
     protected final IRentalRvsRepository rentalRvsRepository;
@@ -44,5 +44,11 @@ public class RentalRvsController {
         }
 
         return rentalRvsRepository.findAll(args);
+    }
+
+    @Get("/rvs/{id}")
+    Rental show(Long id) {
+
+        return rentalRvsRepository.findById(id).orElse(null);
     }
 }

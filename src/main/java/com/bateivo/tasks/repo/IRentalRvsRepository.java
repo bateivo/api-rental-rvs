@@ -5,9 +5,12 @@ import com.bateivo.tasks.dto.Rental;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Optional;
 
 public interface IRentalRvsRepository {
 
     List<Rental> findAll(@NotNull SortingAndOrderArguments args);
+
+    Optional<Rental> findById(long id);
 
 }

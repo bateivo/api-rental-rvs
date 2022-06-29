@@ -13,7 +13,7 @@ import java.util.*;
 @Singleton
 public class RentalRvsRepository implements IRentalRvsRepository{
 
-    private static final List<String> VALID_PROPERTY_NAMES = Arrays.asList("price");
+    private static final List<String> VALID_PROPERTY_NAMES = List.of("price");
 
     private final EntityManager entityManager;
     private final ApplicationConfiguration applicationConfiguration;
@@ -71,5 +71,12 @@ public class RentalRvsRepository implements IRentalRvsRepository{
         args.getOffset().ifPresent(query::setFirstResult);
 
         return query.getResultList();
+    }
+
+    @Override
+    @ReadOnly
+    public Optional<Rental> findById(long id) {
+
+        return Optional.ofNullable(entityManager.find(Rental.class, id));
     }
 }
