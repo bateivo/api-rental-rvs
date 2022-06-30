@@ -1,7 +1,7 @@
 package com.bateivo.tasks.repo;
 
 import com.bateivo.tasks.SortingAndOrderArguments;
-import com.bateivo.tasks.dto.Rental;
+import com.bateivo.tasks.dto.RentalDto;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public interface IRentalRvsRepository {
 
-    List<Rental> findAll(@NotNull SortingAndOrderArguments args);
+    List<RentalDto> findByFilter(@NotNull SortingAndOrderArguments args);
 
-    Optional<Rental> findById(long id);
+    Optional<RentalDto> findById(long id);
 
 }

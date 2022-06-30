@@ -1,7 +1,9 @@
 package com.bateivo.tasks;
 
-import com.bateivo.tasks.dto.Rental;
+import com.bateivo.tasks.model.Rental;
 import com.bateivo.tasks.repo.*;
+import com.bateivo.tasks.service.IRentalRvsService;
+import com.bateivo.tasks.service.RentalRvsService;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.QueryValue;
@@ -16,11 +18,12 @@ import java.util.Optional;
 @Controller()
 public class RentalRvsController {
 
-    protected final IRentalRvsRepository rentalRvsRepository;
+    protected final IRentalRvsService rentalRvsService;
 
-    public RentalRvsController(RentalRvsRepository rentalRvsRepository) {
+    public RentalRvsController(RentalRvsRepository rentalRvsRepository,
+                               RentalRvsService rentalRvsService) {
 
-        this.rentalRvsRepository = rentalRvsRepository;
+        this.rentalRvsService = rentalRvsService;
     }
 
     @Get(value = "/rvs{?args*}")
@@ -42,12 +45,12 @@ public class RentalRvsController {
             args.setOffset(offset.get());
         }
 
-        return rentalRvsRepository.findAll(args);
+        return rentalRvsService.getFiltered(args);
     }
 
     @Get("/rvs/{id}")
     Rental show(Long id) {
 
-        return rentalRvsRepository.findById(id).orElse(null);
+        return rentalRvsService.getById(id).orElse(null);
     }
 }

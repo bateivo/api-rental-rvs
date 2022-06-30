@@ -5,22 +5,22 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "rental_images")
-public class RentalImage {
+public class RentalImageDto {
 
     @Id
     private Long id;
 
+    @Column(name="rental_id")
+    private Long rentalId;
+
     private String url;
 
-    @ManyToOne
-    private Rental rental;
+    public RentalImageDto() {}
 
-    public RentalImage() {}
+    public RentalImageDto(@NotNull Long rentalId, @NotNull String url) {
 
-    public RentalImage(@NotNull String url, Rental rental ) {
+        this.rentalId = rentalId;
         this.url = url;
-        this.rental = rental;
-
     }
 
     public Long getId() {
@@ -39,16 +39,12 @@ public class RentalImage {
         this.url = url;
     }
 
-    public Rental getRental() {
-        return rental;
-    }
+    public Long getRentalId() { return rentalId; }
 
-    public void setRental(Rental rental) {
-        this.rental = rental;
-    }
+    public void setRentalId(Long rentalId) { this.rentalId = rentalId; }
 
     @Override
     public String toString() {
-        return "RentalImage {" + "id = " + id + ", url = " + '\'' + "rental= " + rental + '}';
+        return "RentalImage {" + "id = " + id + ", url = " + url + '}';
     }
 }

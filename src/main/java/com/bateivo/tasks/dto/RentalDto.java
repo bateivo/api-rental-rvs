@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "rentals")
-public class Rental {
+public class RentalDto {
     @Id
     private Long id;
 
@@ -71,12 +71,12 @@ public class Rental {
     private String ownerAvatarUrl;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "rental")
-    private Set<RentalImage> images = new HashSet<>();
+    @OneToMany(mappedBy = "rentalId", fetch = FetchType.EAGER)
+    private Set<RentalImageDto> images = new HashSet<>();
 
-    public Rental() {}
+    public RentalDto() {}
 
-    public Rental(@NotNull Long id, String name) {
+    public RentalDto(@NotNull Long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -257,11 +257,11 @@ public class Rental {
         this.ownerAvatarUrl = ownerAvatarUrl;
     }
 
-    public Set<RentalImage> getImages() {
+    public Set<RentalImageDto> getImages() {
         return images;
     }
 
-    public void setImages(Set<RentalImage> images){
+    public void setImages(Set<RentalImageDto> images){
         this.images = images;
     }
 

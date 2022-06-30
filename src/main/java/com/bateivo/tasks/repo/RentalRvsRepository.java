@@ -2,7 +2,7 @@ package com.bateivo.tasks.repo;
 
 import com.bateivo.tasks.ApplicationConfiguration;
 import com.bateivo.tasks.SortingAndOrderArguments;
-import com.bateivo.tasks.dto.Rental;
+import com.bateivo.tasks.dto.RentalDto;
 import io.micronaut.transaction.annotation.ReadOnly;
 import jakarta.inject.Singleton;
 
@@ -24,11 +24,11 @@ public class RentalRvsRepository implements IRentalRvsRepository{
     }
 
     @ReadOnly
-    public List<Rental> findAll(SortingAndOrderArguments args) {
+    public List<RentalDto> findByFilter(SortingAndOrderArguments args) {
 
         boolean isWhereAdded = false;
 
-        String qlString = "SELECT r FROM Rental as r";
+        String qlString = "SELECT r FROM RentalDto as r";
 
         if (args.getPriceMin().isPresent() && args.getPriceMax().isPresent())
         {
@@ -64,23 +64,23 @@ public class RentalRvsRepository implements IRentalRvsRepository{
             }
         }
 
-        TypedQuery<Rental> query = entityManager.createQuery(qlString, Rental.class);
+        TypedQuery<RentalDto> query = entityManager.createQuery(qlString, RentalDto.class);
 
         query.setMaxResults(args.getLimit().orElseGet(applicationConfiguration::getMax));
 
         args.getOffset().ifPresent(query::setFirstResult);
 
-        List<Rental> rentals = query.getResultList();
+        List<RentalDto> rentals = query.getResultList();
 
         if (args.getNear().isPresent()) {
 
-            List<Rental> nearRentals = new ArrayList<>();
+            List<RentalDto> nearRentals = new ArrayList<>();
             List<String> coordinates = Arrays.asList(args.getNear().get().split("\\s*,\\s*"));
 
             double centerPointLat = Double.parseDouble(coordinates.get(0));
             double centerPointLng = Double.parseDouble(coordinates.get(1));
 
-            for (Rental rental : rentals) {
+            for (RentalDto rental : rentals) {
 
                 if (arePointsNear(centerPointLat, centerPointLng, rental.getLat(), rental.getLng())) {
 
@@ -96,9 +96,9 @@ public class RentalRvsRepository implements IRentalRvsRepository{
 
     @Override
     @ReadOnly
-    public Optional<Rental> findById(long id) {
+    public Optional<RentalDto> findById(long id) {
 
-        return Optional.ofNullable(entityManager.find(Rental.class, id));
+        return Optional.ofNullable(entityManager.find(RentalDto.class, id));
     }
 
     private boolean arePointsNear(double centerPointLat,

@@ -1,6 +1,6 @@
 package com.bateivo.tasks;
 
-import com.bateivo.tasks.dto.Rental;
+import com.bateivo.tasks.model.Rental;
 import io.micronaut.core.type.Argument;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.client.BlockingHttpClient;
